@@ -3,9 +3,9 @@ dotenv.config();
 
 import Substitution from "./Substitution.js";
 import CanvasPageImport from "./WikiPageImport.js";
-import CanvasCourseImport from "./WikiCourseImport.js";
 import WikiPageFactFactory from "./WikiPageFactFactory.js";
 import DataImporter from "./DataImporter.js";
+import CourseFactory from "./CourseFactory.js";
 
 const canvasApi = new Substitution(process.env.CF_API, process.env.NEW_API);
 const canvasStatic = new Substitution(
@@ -18,10 +18,12 @@ const update = new CanvasPageImport(substitutions);
 await update.importPagesFromFile("data/wiki_page_dim.txt");
 const pagesToUpdate = update.getPages();
 
-const courseImport = new CanvasCourseImport();
-await courseImport.importCoursesFromFile("data/course_dim.txt");
-const courses = courseImport.getCourses();
+const courseDataImporter = new DataImporter("data/course_dim.txt");
+const courseFactory = new CourseFactory(courseDataImporter);
+const courses = await courseFactory.createCourses();
+console.log(courses.length, "courses");
 
-const pImporter = new DataImporter("data/wiki_page_fact.txt");
-const wpfFactory = new WikiPageFactFactory(pImporter);
+const wpfDataImporter = new DataImporter("data/wiki_page_fact.txt");
+const wpfFactory = new WikiPageFactFactory(wpfDataImporter);
 const wikiPageFacts = await wpfFactory.createWikiPageFacts();
+console.log(wikiPageFacts.length, "wikiPageFacts");

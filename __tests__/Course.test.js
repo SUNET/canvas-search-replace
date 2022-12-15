@@ -1,41 +1,41 @@
 import { expect } from "@jest/globals";
-import WikiCourse from "../src/WikiCourse";
+import Course from "../src/Course";
 import WikiPage from "../src/WikiPage";
 
-describe("WikiCourse", () => {
+describe("Course", () => {
   const ID = "id";
   const CANVAS_ID = "canvasId";
 
   test("Should throw on missing args", () => {
     expect(() => {
-      new WikiCourse();
+      new Course();
     }).toThrow();
   });
 
   test("Should throw on invalid arg types", () => {
     expect(() => {
-      new WikiCourse(1, 2);
+      new Course(1, 2);
     }).toThrow();
     expect(() => {
-      new WikiCourse(ID, 2);
+      new Course(ID, 2);
     }).toThrow();
   });
 
   test("Should throw empty strings as args", () => {
     expect(() => {
-      new WikiCourse("", "");
+      new Course("", "");
     }).toThrow();
   });
 
   test("Constructor should work", () => {
-    const w = new WikiCourse(ID, CANVAS_ID);
+    const w = new Course(ID, CANVAS_ID);
     expect(w.getId()).toBe(ID);
     expect(w.getCanvasId()).toBe(CANVAS_ID);
     expect(w.getPages()).toEqual([]);
   });
 
   test("Add pages should work", () => {
-    const w = new WikiCourse(ID, CANVAS_ID);
+    const w = new Course(ID, CANVAS_ID);
     const wikiPage1 = new WikiPage("id1", "canvasId1", "body");
     const wikiPage2 = new WikiPage("id2", "canvasId2", "body");
     expect(w.getPages().length).toEqual(0);
