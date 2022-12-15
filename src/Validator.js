@@ -1,4 +1,5 @@
 import DataImporter from "./DataImporter.js";
+import Substitution from "./Substitution.js";
 import WikiPage from "./WikiPage.js";
 
 export const isNonEmptyString = (arg) => {
@@ -25,4 +26,8 @@ export const isWikiPage = (obj) => {
 
 export const isDataImporter = (obj) => {
   return obj instanceof DataImporter;
+};
+
+export const isSubstitution = (obj) => {
+  return obj instanceof Substitution;
 };

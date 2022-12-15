@@ -2,10 +2,10 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 import Substitution from "./Substitution.js";
-import CanvasPageImport from "./WikiPageImport.js";
 import WikiPageFactFactory from "./WikiPageFactFactory.js";
 import DataImporter from "./DataImporter.js";
 import CourseFactory from "./CourseFactory.js";
+import WikiPageFactory from "./WikiPageFactory.js";
 
 const canvasApi = new Substitution(process.env.CF_API, process.env.NEW_API);
 const canvasStatic = new Substitution(
@@ -14,9 +14,10 @@ const canvasStatic = new Substitution(
 );
 
 const substitutions = [canvasApi, canvasStatic];
-const update = new CanvasPageImport(substitutions);
-await update.importPagesFromFile("data/wiki_page_dim.txt");
-const pagesToUpdate = update.getPages();
+const wpDataImporter = new DataImporter("data/wiki_page_dim.txt");
+const wpFactory = new WikiPageFactory(wpDataImporter, substitutions);
+const wikiPages = await wpFactory.createWikiPages();
+console.log(wikiPages.length, "wikiPages");
 
 const courseDataImporter = new DataImporter("data/course_dim.txt");
 const courseFactory = new CourseFactory(courseDataImporter);
