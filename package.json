@@ -10,7 +10,7 @@
     "start": "node src/index.js"
   },
   "author": "",
-  "license": "MIT",
+  "license": "BSD-3-Clause",
   "dependencies": {
     "dotenv": "^16.0.3",
     "node-fetch": "^3.3.0"
