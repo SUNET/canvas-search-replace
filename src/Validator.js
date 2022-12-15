@@ -1,4 +1,4 @@
-import WikiPage from "./WikiPage";
+import WikiPage from "./WikiPage.js";
 
 export const isString = (input) => {
   return typeof input == "string";
