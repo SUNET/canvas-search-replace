@@ -1,17 +1,13 @@
+import { areNonEmptyStrings } from "./Validator.js";
+
 export default class WikiPage {
   #id;
   #canvasId;
   #body;
 
   constructor(id, canvasId, body) {
-    if (!id || typeof id !== "string") {
-      throw `${this.constructor.name}: id must be string`;
-    }
-    if (!canvasId || typeof canvasId !== "string") {
-      throw `${this.constructor.name}: canvasId must be string`;
-    }
-    if (!body || typeof body !== "string") {
-      throw `${this.constructor.name}: body must be string`;
+    if (!areNonEmptyStrings([id, canvasId, body])) {
+      throw `${this.constructor.name}: args must be non empty strings`;
     }
     this.#id = id;
     this.#canvasId = canvasId;

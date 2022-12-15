@@ -1,4 +1,4 @@
-import { isString, isWikiPage } from "./Validator.js";
+import { isNonEmptyString, isWikiPage } from "./Validator.js";
 
 export default class WikiCourse {
   #pages = [];
@@ -6,10 +6,10 @@ export default class WikiCourse {
   #canvasId;
 
   constructor(id, canvasId) {
-    if (!isString(id) || !id)
+    if (!isNonEmptyString(id) || !id)
       throw `${this.constructor.name}: id must be string`;
 
-    if (!isString(canvasId) || !canvasId) {
+    if (!isNonEmptyString(canvasId) || !canvasId) {
       throw `${this.constructor.name}: canvasId must be string`;
     }
     this.#id = id;

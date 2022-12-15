@@ -1,11 +1,11 @@
-import { isString } from "./Validator.js";
+import { areNonEmptyStrings } from "./Validator.js";
 
 export default class Substitution {
   #from;
   #to;
 
   constructor(from, to) {
-    if (isString(from) && isString(to)) {
+    if (areNonEmptyStrings([from, to])) {
       this.#from = from;
       this.#to = to;
     } else {
