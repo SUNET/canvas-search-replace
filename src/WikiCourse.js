@@ -1,5 +1,4 @@
-import { isString } from "./Validator.js";
-import WikiPage from "./WikiPage.js";
+import { isString, isWikiPage } from "./Validator.js";
 
 export default class WikiCourse {
   #pages = [];
@@ -18,7 +17,7 @@ export default class WikiCourse {
   }
 
   addPage(pageToAdd) {
-    if (!pageToAdd instanceof WikiPage) {
+    if (!isWikiPage(pageToAdd)) {
       throw "Must be instance of WikiPage";
     }
     this.#pages.push(pageToAdd);
