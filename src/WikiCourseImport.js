@@ -1,5 +1,5 @@
 import * as fs from "fs";
-import CanvasCourse from "./CanvasCourse.js";
+import WikiCourse from "./WikiCourse.js";
 
 export default class CanvasCourseImport {
   #courses = [];
@@ -18,15 +18,19 @@ export default class CanvasCourseImport {
     return this.#courses;
   }
 
+  #removeHeader(data) {
+    return data.slice(1);
+  }
+
   #generateCourses(coursesRawData) {
     const courses = [];
-    for (const page of coursesRawData.split("\n")) {
+    for (const page of this.#removeHeader(coursesRawData.split("\n"))) {
       const courseRow = page.split("\t");
       const { id, canvasId } = this.#extractIds(courseRow);
       if (!id || !canvasId) {
         continue;
       }
-      const newCourse = new CanvasCourse(id, canvasId);
+      const newCourse = new WikiCourse(id, canvasId);
       courses.push(newCourse);
     }
     return courses;

@@ -1,4 +1,4 @@
-import { isString } from "../Validator.js";
+import { isString } from "./Validator.js";
 import WikiPage from "./WikiPage.js";
 
 export default class WikiCourse {

@@ -1,5 +1,5 @@
 import * as fs from "fs";
-import CanvasCourse from "./CanvasCourse.js";
+import WikiCourse from "./WikiCourse.js";
 
 export default class WikiPageFactImport {
   #importResult = [];
@@ -44,7 +44,7 @@ export default class WikiPageFactImport {
       if (!id || !canvasId) {
         continue;
       }
-      const newCourse = new CanvasCourse(id, canvasId);
+      const newCourse = new WikiCourse(id, canvasId);
       wikiPageFacts.push(newCourse);
     }
     return wikiPageFacts;

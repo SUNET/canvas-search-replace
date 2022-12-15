@@ -3,11 +3,11 @@
   "version": "0.2.0",
   "type": "module",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
-    "start": "node index.js"
+    "start": "node src/index.js"
   },
   "author": "",
   "license": "MIT",

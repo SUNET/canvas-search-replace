@@ -1,5 +1,5 @@
 import * as fs from "fs";
-import CanvasPage from "./CanvasPage.js";
+import WikiPage from "./WikiPage.js";
 
 export default class CanvasPageImport {
   #pages = [];
@@ -25,7 +25,7 @@ export default class CanvasPageImport {
           filteredPages.length +
           " hits from " +
           pages.length +
-          " pageRows."
+          " valid pageRows."
       );
       this.#pages = filteredPages;
     } catch (error) {
@@ -35,10 +35,15 @@ export default class CanvasPageImport {
 
   #generatePages(pagesRawData) {
     const pages = [];
-    for (const page of pagesRawData.split("\n")) {
+    for (const page of pagesRawData.split("\n").slice(1)) {
       const pageRow = page.split("\t");
-      const newPage = new CanvasPage(pageRow[0], pageRow[1], pageRow[3]);
-      pages.push(newPage);
+      const id = pageRow[0];
+      const canvasId = pageRow[1];
+      const body = pageRow[3];
+      if (id && canvasId && body) {
+        const newPage = new WikiPage(id, canvasId, body);
+        pages.push(newPage);
+      }
     }
     return pages;
   }
@@ -47,8 +52,8 @@ export default class CanvasPageImport {
     const filteredPages = [];
     for (const pageToEvaluate of pages) {
       if (
-        pageToEvaluate.body &&
-        this.#bodyHasTargetContent(pageToEvaluate.body)
+        pageToEvaluate.getBody() &&
+        this.#bodyHasTargetContent(pageToEvaluate.getBody())
       ) {
         filteredPages.push(pageToEvaluate);
       }
