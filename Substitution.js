@@ -9,7 +9,7 @@ export default class Substitution {
       this.#from = from;
       this.#to = to;
     } else {
-      throw "Substitution: From and to must be strings";
+      throw `${this.constructor.name}: From and to must be strings`;
     }
   }
 
