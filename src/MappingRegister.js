@@ -15,7 +15,7 @@ export default class MappingRegister {
   getMapping(parentId) {
     const mapping = this.#getMappingFromRegister(parentId);
     if (!mapping) {
-      throw `${this.constructor.name}: Mapping with id ${parentId} does not exist.`;
+      throw `${this.constructor.name}: Mapping does not exist.`;
     }
     return mapping;
   }
@@ -35,7 +35,12 @@ export default class MappingRegister {
   #getMappingFromRegister(parentId) {
     let match;
     this.#mappings.forEach((m) => {
-      if (m.getParentId() === parentId) {
+      const courseId = m.getParentId().courseId;
+      const groupId = m.getParentId().groupId;
+      if (this.#courseMatch(parentId, courseId)) {
+        match = m;
+      }
+      if (this.#groupMatch(parentId, groupId)) {
         match = m;
       }
     });
@@ -44,5 +49,13 @@ export default class MappingRegister {
 
   #noMappings() {
     return this.#mappings.length === 0;
+  }
+
+  #courseMatch(parentId, courseId) {
+    return courseId && parentId.courseId === courseId;
+  }
+
+  #groupMatch(parentId, groupId) {
+    return groupId && parentId.groupId === groupId;
   }
 }

@@ -7,7 +7,8 @@ import DataImporter from "./DataImporter.js";
 import ParentFactory from "./ParentFactory.js";
 import WikiPageFactory from "./WikiPageFactory.js";
 import PageMapper from "./PageMapper.js";
-import MappingRegister from "../MappingRegister.js";
+import MappingRegister from "./MappingRegister.js";
+import ParentMapper from "./ParentMapper.js";
 
 const canvasApi = new Substitution(process.env.CF_API, process.env.NEW_API);
 const canvasStatic = new Substitution(
@@ -37,10 +38,12 @@ const wikiPageFacts = await wpfFactory.createWikiPageFacts();
 console.log(wikiPageFacts.length, "wikiPageFacts");
 
 const mappingRegister = new MappingRegister();
-const pageParentMapper = new PageMapper(
-  mappingRegister,
-  wikiPages,
-  wikiPageFacts
-);
-const mappings = await pageParentMapper.createMappings();
+const pageMapper = new PageMapper(mappingRegister, wikiPages, wikiPageFacts);
+const mappings = await pageMapper.createMappings();
 console.log(mappings.length, "mappings");
+
+const courseMapper = new ParentMapper(mappings);
+const coursesWithPages = courseMapper.createCoursesWithPages(courses);
+const groupsWithPages = courseMapper.createGroupsWithPages(groups);
+console.log(coursesWithPages.length, "courses has pages");
+console.log(groupsWithPages.length, "groups has pages");

@@ -1,9 +1,10 @@
-import MappingRegister from "../MappingRegister.js";
+import MappingRegister from "./MappingRegister.js";
 import DataImporter from "./DataImporter.js";
 import ParentFactory from "./ParentFactory.js";
 import Substitution from "./Substitution.js";
 import WikiPage from "./WikiPage.js";
 import WikiPageFact from "./WikiPageFact.js";
+import ParentId from "./ParentId.js";
 
 export const isNonEmptyString = (arg) => {
   if (!arg || typeof arg !== "string") {
@@ -61,4 +62,8 @@ export const areWikiPages = (objs) => {
     }
   });
   return valid;
+};
+
+export const isParentId = (obj) => {
+  return obj instanceof ParentId;
 };

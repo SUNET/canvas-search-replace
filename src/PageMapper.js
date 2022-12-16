@@ -1,4 +1,5 @@
 import ParentMapping from "./ParentMapping.js";
+import ParentId from "./ParentId.js";
 import {
   areWikiPageFacts,
   areWikiPages,
@@ -53,13 +54,9 @@ export default class PageMapper {
 
   #getParentIdOfPage(wikiPageId) {
     const wpfMatch = this.#getWikiPageFact(wikiPageId);
-    //TODO: can page have both group and course parent?
-    if (wpfMatch.hasParentCourse()) {
-      return wpfMatch.getParentCourseId();
-    }
-    if (wpfMatch.hasParentGroup()) {
-      return wpfMatch.getParentGroupId();
-    }
+    const groupId = wpfMatch.getParentGroupId();
+    const courseId = wpfMatch.getParentCourseId();
+    return new ParentId(courseId, groupId);
   }
 
   #getWikiPageFact(wikiPageId) {

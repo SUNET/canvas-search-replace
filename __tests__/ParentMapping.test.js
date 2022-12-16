@@ -1,9 +1,10 @@
 import { beforeEach, describe, expect, test } from "@jest/globals";
+import ParentId from "../src/ParentId.js";
 import ParentMapping from "../src/ParentMapping.js";
 import WikiPage from "../src/WikiPage";
 
 describe("ParentMapping", () => {
-  const PARENT_ID = "parentId";
+  const PARENT_ID = new ParentId("course", "group");
   const WIKI_PAGE_ID1 = "id1";
   const WIKI_PAGE_ID2 = "id2";
   const CANVAS_ID1 = "id1";

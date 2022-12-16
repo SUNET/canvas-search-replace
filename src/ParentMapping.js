@@ -1,12 +1,12 @@
-import { isNonEmptyString, isWikiPage } from "./Validator.js";
+import { isNonEmptyString, isParentId, isWikiPage } from "./Validator.js";
 
 export default class ParentMapping {
   #parentId;
   #pages = [];
 
   constructor(parentId) {
-    if (!isNonEmptyString(parentId)) {
-      throw `${this.constructor.name}: arg must be non empty string`;
+    if (!isParentId(parentId)) {
+      throw `${this.constructor.name}: Must be instance of ParentId`;
     }
     this.#parentId = parentId;
   }
