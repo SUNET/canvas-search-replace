@@ -1,6 +1,6 @@
 import { isNonEmptyString, isWikiPage } from "./Validator.js";
 
-export default class WikiCourse {
+export default class Parent {
   #pages = [];
   #id;
   #canvasId;

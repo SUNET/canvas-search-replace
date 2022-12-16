@@ -1,4 +1,5 @@
 import DataImporter from "./DataImporter.js";
+import ParentFactory from "./ParentFactory.js";
 import Substitution from "./Substitution.js";
 import WikiPage from "./WikiPage.js";
 
@@ -30,4 +31,8 @@ export const isDataImporter = (obj) => {
 
 export const isSubstitution = (obj) => {
   return obj instanceof Substitution;
+};
+
+export const isParentFactory = (obj) => {
+  return obj instanceof ParentFactory;
 };
