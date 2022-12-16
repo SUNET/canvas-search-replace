@@ -18,7 +18,7 @@ export default class Parent {
 
   addPage(pageToAdd) {
     if (!isWikiPage(pageToAdd)) {
-      throw "Must be instance of WikiPage";
+      throw `${this.constructor.name}: Must be instance of WikiPage`;
     }
     this.#pages.push(pageToAdd);
   }
