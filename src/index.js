@@ -6,7 +6,7 @@ import WikiPageFactFactory from "./WikiPageFactFactory.js";
 import DataImporter from "./DataImporter.js";
 import ParentFactory from "./ParentFactory.js";
 import WikiPageFactory from "./WikiPageFactory.js";
-import PageParentMapper from "./PageParentMapper.js";
+import PageMapper from "./PageMapper.js";
 import MappingRegister from "../MappingRegister.js";
 
 const canvasApi = new Substitution(process.env.CF_API, process.env.NEW_API);
@@ -37,7 +37,7 @@ const wikiPageFacts = await wpfFactory.createWikiPageFacts();
 console.log(wikiPageFacts.length, "wikiPageFacts");
 
 const mappingRegister = new MappingRegister();
-const pageParentMapper = new PageParentMapper(
+const pageParentMapper = new PageMapper(
   mappingRegister,
   wikiPages,
   wikiPageFacts

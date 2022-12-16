@@ -6,9 +6,9 @@ import {
 } from "./Validator.js";
 
 /**
- * Maps a page to its parent: can be group or class.
+ * Maps a page to its parentId.
  */
-export default class PageParentMapper {
+export default class PageMapper {
   #register;
   #wikiPages;
   #wikiPageFacts;
