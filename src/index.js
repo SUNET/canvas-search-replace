@@ -1,5 +1,6 @@
 import * as dotenv from "dotenv";
 dotenv.config();
+import * as readline from "readline/promises";
 
 import Substitution from "./Substitution.js";
 import WikiPageFactFactory from "./WikiPageFactFactory.js";
@@ -9,14 +10,23 @@ import WikiPageFactory from "./WikiPageFactory.js";
 import PageMapper from "./PageMapper.js";
 import MappingRegister from "./MappingRegister.js";
 import ParentMapper from "./ParentMapper.js";
+import UpdateManager from "./UpdateManager.js";
+import CanvasApi from "./CanvasApi.js";
+import ConsoleUi from "./ConsoleUi.js";
 
-const canvasApi = new Substitution(process.env.CF_API, process.env.NEW_API);
-const canvasStatic = new Substitution(
+const kalturaApi = new Substitution(process.env.CF_API, process.env.NEW_API);
+const kalturaStatic = new Substitution(
   process.env.CF_STATIC,
   process.env.NEW_STATIC
 );
+const substitutions = [kalturaApi, kalturaStatic];
 
-const substitutions = [canvasApi, canvasStatic];
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+const consoleUi = new ConsoleUi(rl);
+
 const wpDataImporter = new DataImporter("data/wiki_page_dim.txt");
 const wpFactory = new WikiPageFactory(wpDataImporter, substitutions);
 const wikiPages = await wpFactory.createWikiPages();
@@ -47,3 +57,14 @@ const coursesWithPages = courseMapper.createCoursesWithPages(courses);
 const groupsWithPages = courseMapper.createGroupsWithPages(groups);
 console.log(coursesWithPages.length, "courses has pages");
 console.log(groupsWithPages.length, "groups has pages");
+
+const api = new CanvasApi(consoleUi);
+const updateApi = new UpdateManager(kalturaApi, api, consoleUi);
+for await (const course of coursesWithPages) {
+  await updateApi.updateCourse(course);
+}
+const updateStatic = new UpdateManager(kalturaStatic, api, consoleUi);
+for await (const course of coursesWithPages) {
+  await updateStatic.updateCourse(course);
+}
+consoleUi.close();
