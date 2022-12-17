@@ -12,7 +12,9 @@
   "author": "",
   "license": "BSD-3-Clause",
   "dependencies": {
+    "chalk": "^5.2.0",
     "dotenv": "^16.0.3",
+    "git-diff": "^2.0.6",
     "node-fetch": "^3.3.0"
   },
   "devDependencies": {
