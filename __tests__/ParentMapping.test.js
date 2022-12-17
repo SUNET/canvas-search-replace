@@ -9,8 +9,6 @@ describe("ParentMapping", () => {
   const WIKI_PAGE_ID2 = "id2";
   const CANVAS_ID1 = "id1";
   const CANVAS_ID2 = "id2";
-  const BODY1 = "body 1";
-  const BODY2 = "body 2";
 
   test("Constructor: Should throw on no args", () => {
     expect(() => {
@@ -36,8 +34,8 @@ describe("ParentMapping", () => {
 
     beforeEach(() => {
       mapping = new ParentMapping(PARENT_ID);
-      page1 = new WikiPage(WIKI_PAGE_ID1, CANVAS_ID1, BODY1);
-      page2 = new WikiPage(WIKI_PAGE_ID2, CANVAS_ID2, BODY2);
+      page1 = new WikiPage(WIKI_PAGE_ID1, CANVAS_ID1);
+      page2 = new WikiPage(WIKI_PAGE_ID2, CANVAS_ID2);
     });
 
     test("Should return empty array", () => {
@@ -51,7 +49,6 @@ describe("ParentMapping", () => {
       expect(mapping.getPages().length).toBe(1);
       expect(pages[0].getId()).toBe(WIKI_PAGE_ID1);
       expect(pages[0].getCanvasId()).toBe(CANVAS_ID1);
-      expect(pages[0].getBody()).toBe(BODY1);
     });
 
     test("Should return array with two WikiPages", () => {
@@ -62,7 +59,6 @@ describe("ParentMapping", () => {
       expect(mapping.getPages().length).toBe(2);
       expect(pages[1].getId()).toBe(WIKI_PAGE_ID2);
       expect(pages[1].getCanvasId()).toBe(CANVAS_ID2);
-      expect(pages[1].getBody()).toBe(BODY2);
     });
   });
 });

@@ -1,4 +1,8 @@
-import { isDataImporter, isSubstitution } from "./Validator.js";
+import {
+  areSubstitutions,
+  isDataImporter,
+  isSubstitution,
+} from "./Validator.js";
 import WikiPage from "./WikiPage.js";
 
 export default class WikiPageFactory {
@@ -6,16 +10,18 @@ export default class WikiPageFactory {
   #substitutions = [];
 
   constructor(dataImporter, substitutions) {
-    substitutions.forEach((s) => {
-      if (!isSubstitution(s)) {
-        throw `${this.constructor.name}: argument must be instances of Substitution`;
-      }
-      this.#substitutions.push(s);
-    });
+    if (!areSubstitutions(substitutions)) {
+      throw `${this.constructor.name}: argument must be instances of Substitution`;
+    }
     if (!isDataImporter(dataImporter)) {
       throw `${this.constructor.name}: argument must instance of DataImporter`;
     }
     this.#dataImporter = dataImporter;
+    substitutions.forEach((s) => {
+      if (!isSubstitution(s)) {
+      }
+      this.#substitutions.push(s);
+    });
   }
 
   async createWikiPages() {
@@ -40,7 +46,7 @@ export default class WikiPageFactory {
     const canvasId = pageRow[1];
     const body = pageRow[3];
     if (id && canvasId && this.#bodyHasTargetContent(body)) {
-      return new WikiPage(id, canvasId, body);
+      return new WikiPage(id, canvasId);
     }
     return;
   }

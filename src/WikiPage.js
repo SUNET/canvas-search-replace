@@ -3,15 +3,13 @@ import { areNonEmptyStrings } from "./Validator.js";
 export default class WikiPage {
   #id;
   #canvasId;
-  #body;
 
-  constructor(id, canvasId, body) {
-    if (!areNonEmptyStrings([id, canvasId, body])) {
+  constructor(id, canvasId) {
+    if (!areNonEmptyStrings([id, canvasId])) {
       throw `${this.constructor.name}: args must be non empty strings`;
     }
     this.#id = id;
     this.#canvasId = canvasId;
-    this.#body = body;
   }
 
   getId() {
@@ -20,9 +18,5 @@ export default class WikiPage {
 
   getCanvasId() {
     return this.#canvasId;
-  }
-
-  getBody() {
-    return this.#body;
   }
 }
