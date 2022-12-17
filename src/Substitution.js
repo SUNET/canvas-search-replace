@@ -13,6 +13,10 @@ export default class Substitution {
     }
   }
 
+  updateText(textToUpdate) {
+    return textToUpdate.replaceAll(this.#from, this.#to);
+  }
+
   getFrom() {
     return this.#from;
   }
