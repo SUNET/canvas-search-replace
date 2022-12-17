@@ -36,8 +36,8 @@ describe("Course", () => {
 
   test("Add pages should work", () => {
     const parent = new Parent(ID, CANVAS_ID);
-    const wikiPage1 = new WikiPage("id1", "canvasId1", "body");
-    const wikiPage2 = new WikiPage("id2", "canvasId2", "body");
+    const wikiPage1 = new WikiPage("id1", "canvasId1");
+    const wikiPage2 = new WikiPage("id2", "canvasId2");
     expect(parent.getPages().length).toEqual(0);
 
     parent.addPage(wikiPage1);
