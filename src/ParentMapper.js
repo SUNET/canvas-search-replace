@@ -1,4 +1,5 @@
 import { ParentType } from "./ParentType.js";
+import { areParentMappings } from "./Validator.js";
 
 /**
  * Add pages to it parent.
@@ -7,7 +8,8 @@ export default class ParentMapper {
   #pageMappings;
 
   constructor(pageMappings) {
-    //TODO: add validation
+    if (!areParentMappings(pageMappings)) {
+    }
     this.#pageMappings = pageMappings;
   }
 
