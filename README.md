@@ -4,6 +4,10 @@ Helper tool for programmatic search and replace operations using canvas api
 
 ## Description
 
+This app reads tables, as txt files, from a Canvas data dump. It lets the user perform search and replace operations on Canvas resources via its REST API.
+
+![](./img/architecture.png)
+
 ## Installation
 
 1. clone this repo
