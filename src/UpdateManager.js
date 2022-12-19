@@ -1,35 +1,34 @@
 import gitDiff from "git-diff";
+import ConsoleUi from "./ConsoleUi.js";
 
 export default class UpdateManager {
   #diffOptions = { color: true, noHeaders: true, wordDiff: true };
-  #substitution;
   #ui;
   #apiRequest;
 
-  constructor(substitution, apiRequest, ui) {
-    this.#substitution = substitution;
+  constructor(apiRequest, ui) {
     this.#ui = ui;
     this.#apiRequest = apiRequest;
   }
 
-  async updateCourse(courseToUpdate) {
-    const courseId = courseToUpdate.getCanvasId();
-    const pagesToUpdate = courseToUpdate.getPages();
+  async updateParent(parentToUpdate, substitution) {
+    const courseId = parentToUpdate.getCanvasId();
+    const pagesToUpdate = parentToUpdate.getPages();
+    this.#ui.renderLine();
     this.#ui.renderHeader("Course id: " + courseId);
     for await (const page of pagesToUpdate) {
-      await this.#updatePage(page, courseId);
+      await this.#updatePage(page, courseId, substitution);
       this.#ui.renderLine();
     }
     this.#ui.renderHeader("Course " + courseId + " was updated.");
-    this.#ui.renderLine();
   }
 
-  async #updatePage(page, courseId) {
+  async #updatePage(page, courseId, substitution) {
     this.#ui.renderNormal("Page id: " + page.getCanvasId());
     const response = await this.#apiRequest.get(courseId, page.getCanvasId());
     if (response) {
       const body = response.body;
-      const newBody = this.#substitution.updateText(body);
+      const newBody = substitution.updateText(body);
       if (this.#noDiff(body, newBody)) {
         this.#ui.renderSuccess("NO DIFF, NEXT PAGE.");
       } else {
@@ -50,12 +49,9 @@ export default class UpdateManager {
   }
 
   async #getCommitAnswer() {
-    let answer;
-    while (answer !== "n" && answer !== "y") {
-      answer = await this.#ui.rl.question("Accept change? y/n");
-      answer = answer.toLowerCase();
-    }
-    return answer === "y" ? true : false;
+    const options = [ConsoleUi.Dialog.NO, ConsoleUi.Dialog.YES];
+    const decision = await this.#ui.getCommitDecision(options);
+    return decision === ConsoleUi.Dialog.YES ? true : false;
   }
 
   #noDiff(body, newBody) {
