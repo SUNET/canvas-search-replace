@@ -30,7 +30,7 @@ export default class UpdateManager {
       const body = response.body;
       const newBody = substitution.updateText(body);
       if (this.#noDiff(body, newBody)) {
-        this.#ui.renderSuccess("NO DIFF, NEXT PAGE.");
+        this.#ui.renderSuccess("No diff.");
       } else {
         this.#preview(body, newBody);
         const commitDecision = await this.#getCommitAnswer();
