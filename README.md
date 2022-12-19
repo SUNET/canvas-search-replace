@@ -22,7 +22,8 @@ Sync and unpack the following tables from Canvas Data dump:
 4. course_dim
 
 Move the txt-files to `data/`  
-Canvas Data Schema Documentation: https://portal.inshosteddata.com/docs
+Canvas Data Schema Documentation: https://portal.inshosteddata.com/docs  
+Canvas Data CLI Tool (with video tutorials): https://community.canvaslms.com/t5/Canvas-Data-Users/How-to-Use-the-CLI-Data-Tool/ta-p/421486
 
 ### Define your substitutions
 
