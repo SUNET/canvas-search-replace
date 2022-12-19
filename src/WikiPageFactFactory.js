@@ -11,16 +11,23 @@ export default class WikiPageFactFactory {
     this.#dataImporter = dataImporter;
   }
 
-  async createWikiPageFacts() {
+  async createWikiPageFacts(wikiPages) {
     const linesOfData = await this.#dataImporter.getData();
-    return this.#generateWikiPageFacts(linesOfData);
+    const relevantPageIds = [];
+    wikiPages.forEach((wikiPage) => {
+      relevantPageIds.push(wikiPage.getId());
+    });
+    return this.#generateWikiPageFacts(linesOfData, relevantPageIds);
   }
 
-  #generateWikiPageFacts(linesOfData) {
+  #generateWikiPageFacts(linesOfData, relevantPageIds) {
     const wikiPageFacts = [];
     for (const lineOfData of linesOfData) {
       const newWikiPageFact = this.#createWikiPageFact(lineOfData);
-      if (newWikiPageFact) {
+      if (
+        newWikiPageFact &&
+        relevantPageIds.includes(newWikiPageFact.getWikiPageId())
+      ) {
         wikiPageFacts.push(newWikiPageFact);
       }
     }
