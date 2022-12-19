@@ -12,19 +12,23 @@ Helper tool for programmatic search and replace operations using canvas api
 
 ## Usage
 
-### Prerequisites
+### Tables from Canvas data dump
 
 Sync and unpack the following tables from Canvas Data dump:
 
-1. wiki_page_dim.txt
-2. wiki_page_fact.txt
-3. group_dim.txt
-4. course_dim.txt
+1. wiki_page_dim
+2. wiki_page_fact
+3. group_dim
+4. course_dim
 
-Move the files to `data/`
+Move the txt-files to `data/`  
+Canvas Data Schema Documentation: https://portal.inshosteddata.com/docs
+
+### Define your substitutions
 
 Create `substitutions.js` in `data/`.  
-It's a javascript with the search and replace operations you wish to do. Syntax:
+It's a javascript file with the search and replace operations you wish to do.  
+Syntax:
 
 ```js
 export const data = [
