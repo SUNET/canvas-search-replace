@@ -69,5 +69,5 @@ Updating courses. Word diff review before commit
 If run again after update, we get no diff.  
 ![](./img/course_update_no_diff.png)
 
-If page was deleted we get a 403 forbidden.  
+If the page has been deleted we will get a 403 forbidden.  
 ![](./img/page_deleted_forbidden.png)
