@@ -9,7 +9,7 @@
     "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
     "start": "node src/index.js"
   },
-  "author": "",
+  "author": "Pontus Fagerström <pontus.fagerstrom@sunet.se>",
   "license": "BSD-3-Clause",
   "dependencies": {
     "chalk": "^5.2.0",
