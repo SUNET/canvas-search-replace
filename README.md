@@ -42,6 +42,17 @@ export const data = [
 ];
 ```
 
+### Environment variables
+
+The app expects these environmental variables to be set:
+
+```ini
+BEARER_TOKEN=YOUR_BEARER_TOKEN_HERE
+CANVAS_API_URL=https://YOUR_INSTITUTION.instructure.com
+```
+
+Bearer token is used in http header to authenticate with Canvas API. You need to create a token in Canvas: https://canvas.instructure.com/doc/api/index.html
+
 ### Run the app
 
 `npm run start`
