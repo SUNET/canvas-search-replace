@@ -7,7 +7,7 @@ export default class MappingRegister {
 
   add(mappingToAdd) {
     if (this.#getMappingFromRegister(mappingToAdd.getParentId())) {
-      throw `${this.constructor.name}: Mapping already exists`;
+      throw new Error(`${this.constructor.name}: Mapping already exists`);
     }
     this.#mappings.push(mappingToAdd);
   }
@@ -15,7 +15,7 @@ export default class MappingRegister {
   getMapping(parentId) {
     const mapping = this.#getMappingFromRegister(parentId);
     if (!mapping) {
-      throw `${this.constructor.name}: Mapping does not exist.`;
+      throw new Error(`${this.constructor.name}: Mapping does not exist.`);
     }
     return mapping;
   }
@@ -25,11 +25,7 @@ export default class MappingRegister {
       return false;
     }
     const mapping = this.#getMappingFromRegister(parentId);
-    if (!mapping) {
-      return false;
-    } else {
-      return true;
-    }
+    return !mapping ? false : true
   }
 
   #getMappingFromRegister(parentId) {

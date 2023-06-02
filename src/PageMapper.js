@@ -16,13 +16,13 @@ export default class PageMapper {
 
   constructor(register, wikiPages, wikiPageFacts) {
     if (!isMappingRegister(register)) {
-      throw `${this.constructor.name}: Must be instances of MappingRegister`;
+      throw new Error(`${this.constructor.name}: Must be instances of MappingRegister`);
     }
     if (!areWikiPages(wikiPages)) {
-      throw `${this.constructor.name}: Must be instances of WikiPage`;
+      throw new Error(`${this.constructor.name}: Must be instances of WikiPage`);
     }
     if (!areWikiPageFacts(wikiPageFacts)) {
-      throw `${this.constructor.name}: Must be instances of WikiPageFacts`;
+      throw new Error(`${this.constructor.name}: Must be instances of WikiPageFacts`);
     }
     this.#register = register;
     this.#wikiPages = wikiPages;
@@ -67,7 +67,7 @@ export default class PageMapper {
       }
     });
     if (!wpfMatch) {
-      throw `${this.constructor.name}: Did not find WikiPageFact for WikiPage id ${wikiPageId}`;
+      throw new Error(`${this.constructor.name}: Did not find WikiPageFact for WikiPage id ${wikiPageId}`);
     }
     return wpfMatch;
   }

@@ -1,4 +1,4 @@
-import { isNonEmptyString, isParentId, isWikiPage } from "./Validator.js";
+import { isParentId, isWikiPage } from "./Validator.js";
 
 export default class ParentMapping {
   #parentId;
@@ -6,7 +6,7 @@ export default class ParentMapping {
 
   constructor(parentId) {
     if (!isParentId(parentId)) {
-      throw `${this.constructor.name}: Must be instance of ParentId`;
+      throw new Error(`${this.constructor.name}: Must be instance of ParentId`);
     }
     this.#parentId = parentId;
   }
@@ -17,7 +17,7 @@ export default class ParentMapping {
 
   addPage(pageToAdd) {
     if (!isWikiPage(pageToAdd)) {
-      throw `${this.constructor.name}: Must be instance of WikiPage`;
+      throw new Error(`${this.constructor.name}: Must be instance of WikiPage`);
     }
     this.#pages.push(pageToAdd);
   }

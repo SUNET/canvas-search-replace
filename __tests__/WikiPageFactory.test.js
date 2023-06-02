@@ -9,7 +9,8 @@ describe("WikiPageFactory", () => {
   const s = new Substitution("from", "to");
   const d = new DataImporter(mockFs);
 
-  test("t", () => {
+  test("t", async () => {
     const f = new WikiPageFactory(d, [s]);
+    await f.createWikiPages()
   });
 });

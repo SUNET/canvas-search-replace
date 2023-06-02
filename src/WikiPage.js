@@ -6,7 +6,7 @@ export default class WikiPage {
 
   constructor(id, canvasId) {
     if (!areNonEmptyStrings([id, canvasId])) {
-      throw `${this.constructor.name}: args must be non empty strings`;
+      throw new Error(`${this.constructor.name}: args must be non empty strings`);
     }
     this.#id = id;
     this.#canvasId = canvasId;

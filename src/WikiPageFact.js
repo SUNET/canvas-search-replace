@@ -8,7 +8,7 @@ export default class WikiPageFact {
 
   constructor(wikiPageId, wikiId) {
     if (!areNonEmptyStrings([wikiPageId, wikiId])) {
-      throw `${this.constructor.name}: arguments must be non-empty strings`;
+      throw new Error(`${this.constructor.name}: arguments must be non-empty strings`);
     }
     this.#wikiPageId = wikiPageId;
     this.#wikiId = wikiId;
@@ -26,7 +26,7 @@ export default class WikiPageFact {
     if (isNonEmptyString(id)) {
       this.#parentCourseId = id;
     } else {
-      throw `${this.constructor.name}: parentCourseId must be non-empty string`;
+      throw new Error(`${this.constructor.name}: parentCourseId must be non-empty string`);
     }
   }
 
@@ -34,7 +34,7 @@ export default class WikiPageFact {
     if (isNonEmptyString(id)) {
       this.#parentGroupId = id;
     } else {
-      throw `${this.constructor.name}: parentGroupId must be non-empty string`;
+      throw new Error(`${this.constructor.name}: parentGroupId must be non-empty string`);
     }
   }
 

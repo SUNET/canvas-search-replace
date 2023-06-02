@@ -23,7 +23,7 @@ export default class CanvasApi {
       }
     );
     const status = response.status;
-    if (String(status)[0] === "2") {
+    if (String(status).startsWith("2")) {
       this.#ui.renderSuccess("HTTP STATUS: " + status);
     } else {
       this.#ui.renderError("HTTP STATUS: " + status);

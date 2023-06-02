@@ -11,16 +11,16 @@ export default class WikiPageFactory {
 
   constructor(dataImporter, substitutions) {
     if (!areSubstitutions(substitutions)) {
-      throw `${this.constructor.name}: argument must be instances of Substitution`;
+      throw new Error(`${this.constructor.name}: argument must be instances of Substitution`);
     }
     if (!isDataImporter(dataImporter)) {
-      throw `${this.constructor.name}: argument must instance of DataImporter`;
+      throw new Error(`${this.constructor.name}: argument must instance of DataImporter`);
     }
     this.#dataImporter = dataImporter;
     substitutions.forEach((s) => {
-      if (!isSubstitution(s)) {
+      if (isSubstitution(s)) {
+        this.#substitutions.push(s);
       }
-      this.#substitutions.push(s);
     });
   }
 
@@ -48,7 +48,6 @@ export default class WikiPageFactory {
     if (id && canvasId && this.#bodyHasTargetContent(body)) {
       return new WikiPage(id, canvasId);
     }
-    return;
   }
 
   #bodyHasTargetContent(pageBody) {
