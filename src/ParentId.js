@@ -6,7 +6,7 @@ export default class ParentId {
 
   constructor(courseId, groupId) {
     if (!isNonEmptyString(courseId) && !isNonEmptyString(groupId)) {
-      throw `${this.constructor.name}: eiter courseId or groupId must be present`;
+      throw new Error(`${this.constructor.name}: eiter courseId or groupId must be present`);
     }
     this.courseId = courseId;
     this.groupId = groupId;
