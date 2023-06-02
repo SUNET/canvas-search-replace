@@ -4,22 +4,26 @@ import { expect } from "@jest/globals";
 describe("WikiPage", () => {
   test("Should throw on missing args", () => {
     expect(() => {
-      new WikiPage();
+      const wp = new WikiPage();
+      wp.getId()
     }).toThrow();
   });
 
   test("Should throw on invalid arg types", () => {
     expect(() => {
-      new WikiPage(1, 2);
+      const wp = new WikiPage(1, 2);
+      wp.getId()
     }).toThrow();
     expect(() => {
-      new WikiPage("a", 2);
+      const wp = new WikiPage("a", 2);
+      wp.getId()
     }).toThrow();
   });
 
   test("Should throw empty strings as args", () => {
     expect(() => {
-      new WikiPage("", "");
+      const wp = new WikiPage("", "");
+      wp.getId()
     }).toThrow();
   });
 

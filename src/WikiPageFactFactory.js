@@ -6,7 +6,7 @@ export default class WikiPageFactFactory {
 
   constructor(dataImporter) {
     if (!isDataImporter(dataImporter)) {
-      throw `${this.constructor.name}: arguments must instance of DataImporter`;
+      throw new Error(`${this.constructor.name}: arguments must instance of DataImporter`);
     }
     this.#dataImporter = dataImporter;
   }

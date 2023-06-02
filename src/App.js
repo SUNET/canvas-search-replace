@@ -24,29 +24,16 @@ export default class App {
     while (userAction != ConsoleUi.MenuEvent.QUIT) {
       userAction = undefined;
       options = [];
-      if (!this.#appData.hasWikiPages() || !this.#appData.hasWikiPageFacts()) {
+      if (this.#shouldShowImportPages)
         options.push(ConsoleUi.MenuEvent.IMPORT_PAGES);
-      }
-      if (
-        this.#appData.hasWikiPages() &&
-        this.#appData.hasWikiPageFacts() &&
-        !this.#appData.hasCourses()
-      ) {
+      if (this.#shouldShowImportCourses)
         options.push(ConsoleUi.MenuEvent.IMPORT_COURSES);
-      }
-      if (
-        this.#appData.hasWikiPages() &&
-        this.#appData.hasWikiPageFacts() &&
-        !this.#appData.hasGroups()
-      ) {
+      if (this.#shouldShowImportGroups)
         options.push(ConsoleUi.MenuEvent.IMPORT_GROUPS);
-      }
-      if (this.#appData.hasGroupsWithPages()) {
+      if (this.#appData.hasGroupsWithPages())
         options.push(ConsoleUi.MenuEvent.UPDATE_GROUPS);
-      }
-      if (this.#appData.hasCoursesWithPages()) {
+      if (this.#appData.hasCoursesWithPages())
         options.push(ConsoleUi.MenuEvent.UPDATE_COURSES);
-      }
       options.push(ConsoleUi.MenuEvent.QUIT);
       this.#ui.renderMenu(options);
       while (!options.includes(userAction)) {
@@ -55,6 +42,22 @@ export default class App {
       await this.#handleUserAction(userAction);
     }
     this.#ui.close();
+  }
+
+  #shouldShowImportCourses() {
+    return this.#appData.hasWikiPages() &&
+           this.#appData.hasWikiPageFacts() &&
+           !this.#appData.hasCourses()
+  }
+
+  #shouldShowImportPages() {
+    return !this.#appData.hasWikiPages() || !this.#appData.hasWikiPageFacts()
+  }
+
+  #shouldShowImportGroups() {
+    return this.#appData.hasWikiPages() &&
+           this.#appData.hasWikiPageFacts() &&
+           !this.#appData.hasGroups()
   }
 
   async #handleUserAction(userAction) {
