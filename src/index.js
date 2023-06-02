@@ -16,4 +16,4 @@ const consoleUi = new ConsoleUi(rl);
 const appData = new AppData();
 appData.loadSubstitutions(substitutionData);
 const app = new App(appData, consoleUi);
-app.run();
+app.run().catch(e => console.error(e));
