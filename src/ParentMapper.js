@@ -9,6 +9,7 @@ export default class ParentMapper {
 
   constructor(pageMappings) {
     if (!areParentMappings(pageMappings)) {
+      throw new Error("Arg must not instances of ParentMapping")
     }
     this.#pageMappings = pageMappings;
   }

@@ -7,10 +7,10 @@ export default class Parent {
 
   constructor(id, canvasId) {
     if (!isNonEmptyString(id) || !id)
-      throw `${this.constructor.name}: id must be string`;
+      throw new Error(`${this.constructor.name}: id must be string`);
 
     if (!isNonEmptyString(canvasId) || !canvasId) {
-      throw `${this.constructor.name}: canvasId must be string`;
+      throw new Error(`${this.constructor.name}: canvasId must be string`);
     }
     this.#id = id;
     this.#canvasId = canvasId;
@@ -18,7 +18,7 @@ export default class Parent {
 
   addPage(pageToAdd) {
     if (!isWikiPage(pageToAdd)) {
-      throw `${this.constructor.name}: Must be instance of WikiPage`;
+      throw new Error(`${this.constructor.name}: Must be instance of WikiPage`);
     }
     this.#pages.push(pageToAdd);
   }

@@ -8,8 +8,6 @@ import ParentMapper from "./ParentMapper.js";
 import UpdateManager from "./UpdateManager.js";
 import CanvasApi from "./CanvasApi.js";
 import ConsoleUi from "./ConsoleUi.js";
-import Parent from "./Parent.js";
-import WikiPage from "./WikiPage.js";
 
 export default class App {
   #appData;

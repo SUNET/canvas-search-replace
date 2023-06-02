@@ -8,11 +8,7 @@ import ParentId from "./ParentId.js";
 import ParentMapping from "./ParentMapping.js";
 
 export const isNonEmptyString = (arg) => {
-  if (!arg || typeof arg !== "string") {
-    return false;
-  } else {
-    return true;
-  }
+   return !arg || typeof arg !== "string" ? false : true
 };
 
 export const isWikiPage = (obj) => {
