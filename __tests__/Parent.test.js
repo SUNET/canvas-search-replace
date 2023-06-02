@@ -8,22 +8,26 @@ describe("Course", () => {
 
   test("Should throw on missing args", () => {
     expect(() => {
-      new Parent();
+      const p = new Parent();
+      p.getId()
     }).toThrow();
   });
 
   test("Should throw on invalid arg types", () => {
     expect(() => {
-      new Parent(1, 2);
+      const p = new Parent(1, 2);
+      p.getId()
     }).toThrow();
     expect(() => {
-      new Parent(ID, 2);
+      const p = new Parent(ID, 2);
+      p.getId()
     }).toThrow();
   });
 
   test("Should throw empty strings as args", () => {
     expect(() => {
-      new Parent("", "");
+      const p = new Parent("", "");
+      p.getId()
     }).toThrow();
   });
 
