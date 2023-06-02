@@ -12,13 +12,15 @@ describe("ParentMapping", () => {
 
   test("Constructor: Should throw on no args", () => {
     expect(() => {
-      new ParentMapping();
+      const pm = new ParentMapping();
+      pm.getPages()
     }).toThrow();
   });
 
   test("Constructor: Should throw on illegal arg", () => {
     expect(() => {
-      new ParentMapping(1);
+      const pm = new ParentMapping(1);
+      pm.getPages()
     }).toThrow();
   });
 

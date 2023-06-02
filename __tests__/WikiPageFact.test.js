@@ -4,22 +4,26 @@ import WikiPageFact from "../src/WikiPageFact";
 describe("WikiPageFact", () => {
   test("Should throw on missing args", () => {
     expect(() => {
-      new WikiPageFact();
+      const wpf = new WikiPageFact();
+      wpf.getParentGroupId()
     }).toThrow();
   });
 
   test("Should throw on invalid arg types", () => {
     expect(() => {
-      new WikiPageFact(1, 2);
+      const wpf = new WikiPageFact(1, 2);
+      wpf.getParentGroupId()
     }).toThrow();
     expect(() => {
-      new WikiPageFact("a", 2);
+      const wpf = new WikiPageFact("a", 2);
+      wpf.getParentGroupId()
     }).toThrow();
   });
 
   test("Should throw empty strings as args", () => {
     expect(() => {
-      new WikiPageFact("", "");
+      const wpf = new WikiPageFact("", "");
+      wpf.getParentGroupId()
     }).toThrow();
   });
 
